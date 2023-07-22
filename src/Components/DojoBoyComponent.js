@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Typography} from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import GamePlay from "./GamePlay";
@@ -38,7 +38,7 @@ const disabledColors = {
 }
 
 function DojoBoyComponent(props) {
-  const { isDisabled } = props;
+  const { isDisabled, isInGame, setIsInGame } = props;
   const classes = useStyles(isDisabled)();
 
   const [isConnected, setIsConnected] = useState(false);
@@ -68,13 +68,23 @@ function DojoBoyComponent(props) {
     setIsConnected(true);
   }
 
+  useEffect(() => {
+    if (selectedNFT) {
+      setIsWaitingForOpponent(true);
+      setTimeout(() => {
+        setIsWaitingForOpponent(false);
+        setIsInGame(true);
+      }, 3000);
+    }
+  }, [selectedNFT]);
+
   return (
     <button className={classes.root} onClick={connectWallet} disabled={isConnected}>
       <Typography className={classes.header}>DojoBoy</Typography>
-      {!isConnected && <Typography className="align-middle">Connect Your Wallet</Typography>}
+      {!isConnected && !isDisabled && <Typography className="align-middle" sx={{ marginTop: 30 }}>Connect Your Wallet</Typography>}
       {isConnected && !selectedNFT && <SelectNFT nftList={nftList} setSelectedNFT={setSelectedNFT}/>}
       {isConnected && selectedNFT && iswaitingForOpponent && <WaitingOpponent />}
-      {isConnected && selectedNFT && !iswaitingForOpponent && <GamePlay isDisabled={isDisabled} />}
+      {((isConnected && selectedNFT && !iswaitingForOpponent) || (isInGame && isDisabled))  && <GamePlay isDisabled={isDisabled} />}
     </button>
   );
 }

@@ -5,12 +5,13 @@ import DojoBoyComponent from "./Components/DojoBoyComponent";
 import StakedComponent from "./Components/StakedComponent";
 
 function App() {
+  const [isInGame, setIsInGame] = React.useState(false);
   return (
     <div style={{backgroundColor:'#E1E1E1'}} className="w-full h-full">
       <Container maxWidth="lg">
         <Grid container spacing={3}>
           <Grid item xs={12} sm={4}>
-            <DojoBoyComponent isDisabled={false} />
+            <DojoBoyComponent isDisabled={false} isInGame={isInGame} setIsInGame={setIsInGame} />
           </Grid>
           <Grid item xs={12} sm={4}>
             <Box mb={4}>
@@ -19,7 +20,7 @@ function App() {
             <GameHistoryComponent />
           </Grid>
           <Grid item xs={12} sm={4}>
-            <DojoBoyComponent isDisabled={true} />
+            <DojoBoyComponent isDisabled={true} isInGame={isInGame} setIsInGame={setIsInGame} />
           </Grid>
         </Grid>
       </Container>

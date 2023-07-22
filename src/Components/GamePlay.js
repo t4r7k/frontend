@@ -6,6 +6,8 @@ import { ReactComponent as AttackIcon } from '../icons/attack_white.svg';
 import { ReactComponent as ShieldIcon } from '../icons/health_white.svg';
 import { ReactComponent as HealthIcon } from '../icons/health.svg';
 import { ReactComponent as BatteryIcon } from '../icons/battery.svg';
+import { ReactComponent as PoliceIcon } from '../icons/police.svg';
+import { ReactComponent as RobberIcon } from '../icons/robber.svg';
 
 const useStyles = (isDisabled) => makeStyles({
   screen: {
@@ -134,6 +136,11 @@ function GamePlay({isDisabled}) {
               </Typography>
             </div>
           </div>
+          {isDisabled ?
+            <SvgIcon component={RobberIcon}
+                     sx={{fillOpacity: '0.7', fontSize: 150, marginLeft: 10, marginBottom: -5}}/> :
+            <SvgIcon component={PoliceIcon} sx={{fontSize: 150, marginLeft: 10, marginBottom: -5}}/>
+          }
           <div className="flex flex-col">
             <Typography className={classes.font} alignSelf="end">{currentCount*200}/{maxCount*200}</Typography>
             <Grid container spacing={0.1} margin={0}>
@@ -163,8 +170,8 @@ function GamePlay({isDisabled}) {
               </div>
             }/>
             <Button className={classes.squareButton} onClick={handleHeal} startIcon={
-              <div className="pl-11 pt-8">
-                <SvgIcon component={HealthIcon} sx={{ fontSize: 60}} />
+              <div className="flex justify-center items-center pl-3">
+                <SvgIcon component={HealthIcon} sx={{fontSize: 60, marginRight: -4, marginBottom: -4}} />
               </div>
             }/>
           </div>
