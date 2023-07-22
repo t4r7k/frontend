@@ -32,7 +32,7 @@ const useStyles = makeStyles({
     alignSelf: 'center',
     alignItems: 'center',
     overflow: 'auto',
-    maxHeight: '120px',
+    maxHeight: '150px',
     margin: '10px 0',
   },
 });
