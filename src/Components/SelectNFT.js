@@ -33,6 +33,7 @@ const useStyles = makeStyles({
     alignItems: 'center',
     overflow: 'auto',
     maxHeight: '150px',
+    width: '100%',
     margin: '10px 0',
   },
 });
@@ -53,7 +54,7 @@ function SelectNFT({nftList, setSelectedNFT}) {
             {nftList.map((nft) => (
               <ListItem disablePadding>
                 <ListItemButton onClick={() => handleListItemClick(nft)}>
-                  <ListItemText primary={nft.name} style={{color:'black'}}/>
+                  <ListItemText primary={nft.name} style={{color:'black', textAlign:'center'}}/>
                 </ListItemButton>
               </ListItem>
             ))}

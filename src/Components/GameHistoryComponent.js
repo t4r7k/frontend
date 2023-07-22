@@ -21,8 +21,8 @@ const GameHistoryComponent = () => {
   }]);
 
   const handleAdd = () => {
-    setHistory([...history, {
-      createdAt: '12:04',
+    setHistory([{
+      createdAt: '12:05',
       changeLeft: '+600',
       iconLeft: PoliceIcon,
       leftAddr: '0x12567',
@@ -30,7 +30,7 @@ const GameHistoryComponent = () => {
       iconRight: PoliceIcon,
       rightAddr: '0x12567',
       changeRight: '-600',
-    }]);
+    }, ...history]);
   };
 
   return (

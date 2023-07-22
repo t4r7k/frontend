@@ -2,6 +2,10 @@ import {Button, Grid, Paper, SvgIcon, Typography} from "@mui/material";
 import React, {useEffect} from "react";
 import {makeStyles} from "@mui/styles";
 import { ReactComponent as ArrowIcon } from '../icons/arrow_button.svg';
+import { ReactComponent as AttackIcon } from '../icons/attack_white.svg';
+import { ReactComponent as ShieldIcon } from '../icons/health_white.svg';
+import { ReactComponent as HealthIcon } from '../icons/health.svg';
+import { ReactComponent as BatteryIcon } from '../icons/battery.svg';
 
 const useStyles = (isDisabled) => makeStyles({
   screen: {
@@ -119,7 +123,10 @@ function GamePlay({isDisabled}) {
               <Typography className={classes.font}>{currentTurn}</Typography>
             </div>
             <div className="flex flex-col items-center">
-              <Typography className={classes.font}>Remaining time</Typography>
+              <div className="flex justify-center items-center">
+                <Typography className={classes.font} sx={{paddingRight:'2px'}}>Remaining time</Typography>
+                <BatteryIcon />
+              </div>
               <Typography className={classes.font}>
                 {Math.floor((time/6000) % 60)}:
                 {Math.floor((time/100) % 60) < 10 ? "0" : ""}{Math.floor((time/100) % 60)}.
@@ -139,13 +146,27 @@ function GamePlay({isDisabled}) {
           </div>
         </div>
       </div>
-      <div className="flex justify-between pt-12 items-center">
-        <SvgIcon component={ArrowIcon} viewBox="0 0 150 150" sx={{width:'120px', height:'120px'}}/>
+      <div className="flex justify-between pt-4 items-center">
+        <div className="pt-8">
+          <SvgIcon component={ArrowIcon} viewBox="0 0 150 150" sx={{width:'120px', height:'120px'}}/>
+        </div>
         <div className="flex items-center">
-          <Button className={classes.smallRoundButton} onClick={handleAttack}/>
+          <Button className={classes.smallRoundButton} onClick={handleAttack} startIcon={
+            <div className="flex justify-center items-center pl-3">
+              <AttackIcon/>
+            </div>
+          }/>
           <div className="flex flex-col justify-around gap-3">
-            <Button className={classes.smallRoundButton} onClick={handleDodge}/>
-            <Button className={classes.squareButton} onClick={handleHeal} />
+            <Button className={classes.smallRoundButton} onClick={handleDodge} startIcon={
+              <div className="flex justify-center items-center pl-3">
+                <ShieldIcon/>
+              </div>
+            }/>
+            <Button className={classes.squareButton} onClick={handleHeal} startIcon={
+              <div className="pl-11 pt-8">
+                <SvgIcon component={HealthIcon} sx={{ fontSize: 60}} />
+              </div>
+            }/>
           </div>
         </div>
       </div>
